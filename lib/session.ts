@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
   },
   theme: {
     colorScheme: 'light',
-    logo: '/logo.png',
+    logo: '/logo.svg',
   },
   callbacks: {
     async session({ session }) {
@@ -43,8 +43,8 @@ export const authOptions: NextAuthOptions = {
             ...data?.user,
           }
         };
-      } catch (error) {
-        console.log('Error retrieving user data.', error);
+      } catch (error: any) {
+        console.log('Error retrieving user data: ', error.message);
 
         return session;
       }
@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
 
         return true;
       } catch (error: any) {
-        console.log(error);
+        console.log('Error checking if user exists: ', error.message);
         return false;
       }
     }
