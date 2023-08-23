@@ -19,6 +19,7 @@
 .DS_Store
 *.pem
 /%Programmation%nextjs13_flexibble
+.grafbase
 
 # debug
 npm-debug.log*
