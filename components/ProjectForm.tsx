@@ -1,9 +1,10 @@
 'use client';
 
 import { ProjectInterface, SessionInterface } from '@/common.type';
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { categoryFilters } from '@/constants';
 import { createNewProject, fetchToken } from '@/lib/actions';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import FormField from './FormField';
 import CustomMenu from './CustomMenu';
@@ -16,25 +17,22 @@ type Props = {
 };
 
 export default function ProjectForm({ type, session, project }: Props) {
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const router = useRouter();
+  const [submitting, setSubmitting] = useState<boolean>(false)  
+  const [form, setForm] = useState({
+    title: '',
+    image: '',
+    description: '',
+    webSiteUrl: '',
+    githubUrl: '',
+    category: '',
+  });
 
-    setSubmitting(true);
-
-    const { token } = await fetchToken();
-
-    try {
-      if (type === "create") {
-        await createNewProject(form, session?.user?.id, token)
-
-        
-      }
-
-    } catch (error) {
-      alert(`Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`);
-    } finally {
-      setSubmitting(false)
-    }
+  const handleStateChange = (fieldName: string, value: string) => {
+    setForm((prevState) => ({
+      ...prevState,
+      [fieldName]: value,
+    }))
   };
 
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +40,7 @@ export default function ProjectForm({ type, session, project }: Props) {
 
     const file = e.target.files?.[0];
 
-    if (!file) {
+    if(!file) {
       return;
     }
 
@@ -61,24 +59,27 @@ export default function ProjectForm({ type, session, project }: Props) {
     };
   };
 
-  const handleStateChange = (fieldName: string, value: string) => {
-    setForm((prevState) => ({
-      ...prevState,
-      [fieldName]: value,
-    }))
-  };
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const [submitting, setSubmitting] = useState<boolean>(false)
-  
-  const [form, setForm] = useState({
-    title: '',
-    image: '',
-    description: '',
-    webSiteUrl: '',
-    githubUrl: '',
-    linkedInUrl: '',
-    category: '',
-  });
+    setSubmitting(true);
+
+    const { token } = await fetchToken();
+
+    try {
+      if(type === "create") {
+        await createNewProject(form, session?.user?.id, token)
+
+        router.push('/');
+      }
+
+    } catch (error) {
+      //alert(`Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`);
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <form onSubmit={handleFormSubmit} className='flexStart form'>

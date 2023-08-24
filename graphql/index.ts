@@ -47,7 +47,7 @@ export const createUserMutation = `
 				avatarUrl
 				description
 				githubUrl
-				linkedinUrl
+				linkedInUrl
 				id
 			}
 		}
@@ -58,19 +58,19 @@ export const projectsQuery = `
   query getProjects($category: String, $endCursor: String) {
     projectSearch(first: 8, after: $endCursor, filter: {category: {eq: $category}}) {
       pageInfo {
-        hasNextPage
         hasPreviousPage
+        hasNextPage
         startCursor
         endCursor
       }
       edges {
         node {
-          title
-          githubUrl
-          description
-          liveSiteUrl
           id
           image
+          title
+          description
+          webSiteUrl
+          githubUrl
           category
           createdBy {
             id
@@ -91,7 +91,7 @@ export const getProjectByIdQuery = `
       title
       description
       image
-      liveSiteUrl
+      webSiteUrl
       githubUrl
       category
       createdBy {
@@ -113,7 +113,7 @@ export const getUserQuery = `
       avatarUrl
       description
       githubUrl
-      linkedinUrl
+      linkedInUrl
     }
   }
 `;
@@ -127,7 +127,7 @@ export const getProjectsOfUserQuery = `
       description
       avatarUrl
       githubUrl
-      linkedinUrl
+      linkedInUrl
       projects(last: $last) {
         edges {
           node {

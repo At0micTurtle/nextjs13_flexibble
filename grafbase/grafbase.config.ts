@@ -15,10 +15,10 @@ const User = g.model('User', {
 
 // @ts-ignore
 const Project = g.model('Project', {
+  image: g.url(),
   title: g.string().length({ min: 3 }),
   description: g.string(),
-  image: g.url(),
-  liveSiteUrl: g.url(),
+  webSiteUrl: g.url(),
   githubUrl: g.url(),
   category: g.string().search(),
   createdBy: g.relation(() => User),
