@@ -2,10 +2,10 @@ import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 
 type Props = {
-  title: string,
-  state: string,
-  filters: Array<string>,
-  setState: (value: string) => void,
+  title: string;
+  state: string;
+  filters: Array<string>;
+  setState: (value: string) => void;
 };
 
 export default function CustomMenu({ title, state, filters, setState }: Props) {

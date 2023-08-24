@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { SessionInterface } from '@/common.type';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ProfileMenu({ session }: { session: SessionInterface }) {
   const [openModal, setOpenModal] = useState(false);

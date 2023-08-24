@@ -1,9 +1,9 @@
+import { NavLinks } from '@/constants';
+import { getCurrentUser } from '@/lib/session';
 import Link from 'next/link';
 import Image from 'next/image';
 import AuthProviders from './AuthProviders';
 import ProfileMenu from './ProfileMenu';
-import { NavLinks } from '@/constants';
-import { getCurrentUser } from '@/lib/session';
 
 export default async function Navbar() {
   const session = await getCurrentUser();

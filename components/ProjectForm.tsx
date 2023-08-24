@@ -11,9 +11,9 @@ import CustomMenu from './CustomMenu';
 import Button from './Button';
 
 type Props = {
-  type: string,
-  session: SessionInterface,
-  project?: ProjectInterface,
+  type: string;
+  session: SessionInterface;
+  project?: ProjectInterface;
 };
 
 export default function ProjectForm({ type, session, project }: Props) {

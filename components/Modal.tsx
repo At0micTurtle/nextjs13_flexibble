@@ -3,7 +3,6 @@
 import { useCallback, useRef, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { on } from 'events';
 
 export default function Modal({ children }: { children: ReactNode}) {
   const overlay = useRef<HTMLDivElement>(null);

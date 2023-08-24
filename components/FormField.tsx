@@ -1,10 +1,10 @@
 type Props = {
-  type?: string,
-  title: string,
-  state: string,
-  placeholder: string,
-  isTextArea?: boolean,
-  setState: (value: string) => void,
+  type?: string;
+  title: string;
+  state: string;
+  placeholder: string;
+  isTextArea?: boolean;
+  setState: (value: string) => void;
 };
 
 export default function FormField({ type, title, state, placeholder, isTextArea, setState }: Props) {

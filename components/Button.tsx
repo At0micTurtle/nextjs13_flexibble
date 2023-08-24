@@ -2,13 +2,13 @@ import { MouseEventHandler } from 'react';
 import Image from 'next/image';
 
 type Props = {
-  title: string,
-  leftIcon?: string | null,
-  rightIcon?: string | null,
-  handleClick?: MouseEventHandler,
-  submitting?: boolean | false,
-  type?: 'button' | 'submit',
-  bgColor?: string,
+  title: string;
+  leftIcon?: string | null;
+  rightIcon?: string | null;
+  handleClick?: MouseEventHandler;
+  submitting?: boolean | false;
+  type?: 'button' | 'submit';
+  bgColor?: string;
   textColor?: string
 }
 
