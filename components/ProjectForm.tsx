@@ -1,9 +1,9 @@
 'use client';
 
 import { ProjectInterface, SessionInterface } from '@/common.type';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { categoryFilters } from '@/constants';
-import { createNewProject, fetchToken } from '@/lib/actions';
+import { createNewProject, fetchToken, updateProject } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import FormField from './FormField';
@@ -20,12 +20,12 @@ export default function ProjectForm({ type, session, project }: Props) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState<boolean>(false)  
   const [form, setForm] = useState({
-    title: '',
-    image: '',
-    description: '',
-    webSiteUrl: '',
-    githubUrl: '',
-    category: '',
+    image: project?.image || '',
+    title: project?.title || '',
+    description: project?.description || '',
+    webSiteUrl: project?.webSiteUrl || '',
+    githubUrl: project?.githubUrl || '',
+    category: project?.category || '',
   });
 
   const handleStateChange = (fieldName: string, value: string) => {
@@ -35,9 +35,31 @@ export default function ProjectForm({ type, session, project }: Props) {
     }))
   };
 
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const { token } = await fetchToken();
+
+    try {
+      if(type === 'create') {
+        await createNewProject(form, session?.user?.id, token)
+        router.push('/');
+      }
+
+      if(type === 'edit') {
+        await updateProject(form, project?.id as string, token)
+        router.push(`/project/${project?.id}`);
+      }
+
+    } catch (error) {
+      alert(`Failed to ${type === 'create' ? 'create' : 'edit'} a project. Try again!`);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     const file = e.target.files?.[0];
 
     if(!file) {
@@ -49,36 +71,11 @@ export default function ProjectForm({ type, session, project }: Props) {
     }
 
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
-
     reader.onload = () => {
       const result = reader.result as string;
-
       handleStateChange('image', result);
     };
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setSubmitting(true);
-
-    const { token } = await fetchToken();
-
-    try {
-      if(type === "create") {
-        await createNewProject(form, session?.user?.id, token)
-
-        router.push('/');
-      }
-
-    } catch (error) {
-      //alert(`Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`);
-      console.log(error);
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   return (

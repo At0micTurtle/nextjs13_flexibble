@@ -12,28 +12,27 @@ type Props = {
 }
 
 export default function ProjectActions({ projectId }: Props) {
-  const [isDeleting, setIsDeleting] = useState<boolean>(false)
-  const router = useRouter()  
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const router = useRouter();
   const handleDeleteProject = async () => {
       setIsDeleting(true)
       
       const { token } = await fetchToken();
 
       try {
-          await deleteProject(projectId, token);
-          
+          await deleteProject(projectId, token);          
           router.push('/');
       } catch (error) {
           console.error(error)
       } finally {
           setIsDeleting(false)
       }
-  }
+  };
 
   return (
     <>
       <Link href={`/edit-project/${projectId}`} className='flexCenter edit-action_btn'>
-        <Image src='/pencile.svg' width={15} height={15} alt='edit' />
+        <Image src='/pencil.svg' width={15} height={15} alt='edit' />
       </Link>
 
       <button
