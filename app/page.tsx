@@ -2,6 +2,7 @@ import { ProjectInterface } from '@/common.type';
 import { fetchAllProjects } from '@/lib/actions';
 import ProjectCard from '@/components/ProjectCard';
 import Categories from '@/components/Categories';
+import LoadMore from '@/components/LoadMore';
 
 type ProjectsSearch = {
   projectSearch: {
@@ -31,6 +32,7 @@ export const revalidate = 0;
 export default async function Home({ searchParams: {category, endcursor}}: Props) {
   const data = await fetchAllProjects(category, endcursor) as ProjectsSearch;
   const projectsToDisplay = data?.projectSearch?.edges || [];
+  const pagination = data?.projectSearch?.pageInfo;
 
   if(projectsToDisplay.length === 0) {
     return (
@@ -59,7 +61,12 @@ export default async function Home({ searchParams: {category, endcursor}}: Props
         ))}
       </section>
 
-      <h1>Load More</h1>
+      <LoadMore
+        startCursor={pagination.startCursor}
+        endCursor={pagination.endCursor}
+        hasPreviousPage={pagination.hasPreviousPage}
+        hasNextPage={pagination.hasNextPage}
+      />
     </section>
   );
 };
