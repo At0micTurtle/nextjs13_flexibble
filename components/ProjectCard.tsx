@@ -55,7 +55,7 @@ export default function ProjectCard({ id, image, title, name, avatarUrl, userId 
         <div className='flexCenter gap-3'>
           <div className='flexCenter gap-2'>
             <Image
-              src='/heart.svg'
+              src='/hearth.svg'
               alt='Heart Icon'
               width={13}
               height={12}

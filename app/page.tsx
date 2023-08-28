@@ -1,6 +1,7 @@
 import { ProjectInterface } from '@/common.type';
 import { fetchAllProjects } from '@/lib/actions';
 import ProjectCard from '@/components/ProjectCard';
+import Categories from '@/components/Categories';
 
 type ProjectsSearch = {
   projectSearch: {
@@ -15,8 +16,8 @@ type ProjectsSearch = {
 };
 
 type searchParams = {
-  category?: string | null;
-  endcursor?: string | null;
+  category?: string;
+  endcursor?: string;
 };
 
 type Props = {
@@ -34,7 +35,7 @@ export default async function Home({ searchParams: {category, endcursor}}: Props
   if(projectsToDisplay.length === 0) {
     return (
       <section className='flexStart flex-col paddings'>
-        Categories
+        <Categories />
         <p className='no-result-text text-center'>No projects found, go create some first.</p>
       </section>
     )
@@ -42,7 +43,7 @@ export default async function Home({ searchParams: {category, endcursor}}: Props
 
   return (
     <section className='flexStart flex-col paddings mb-16'>
-      <h1>Categories</h1>
+      <Categories />
 
       <section className='projects-grid'>
         {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
