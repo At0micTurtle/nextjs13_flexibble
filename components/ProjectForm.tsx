@@ -23,7 +23,7 @@ export default function ProjectForm({ type, session, project }: Props) {
     image: project?.image || '',
     title: project?.title || '',
     description: project?.description || '',
-    webSiteUrl: project?.webSiteUrl || '',
+    liveSiteUrl: project?.liveSiteUrl || '',
     githubUrl: project?.githubUrl || '',
     category: project?.category || '',
   });
@@ -121,9 +121,9 @@ export default function ProjectForm({ type, session, project }: Props) {
       <FormField
         type='url'
         title='Website URL'
-        state={form.webSiteUrl}
+        state={form.liveSiteUrl}
         placeholder='https://example.com'
-        setState={(value) => handleStateChange('webSiteUrl', value)}
+        setState={(value) => handleStateChange('liveSiteUrl', value)}
       />
 
       <FormField

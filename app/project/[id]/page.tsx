@@ -80,7 +80,7 @@ export default async function Project({ params: { id } }: { params: { id: string
               🖥 <span className='underline'>Github</span> 
             </Link>
             <Image src='/dot.svg' width={4} height={4} alt='dot' />
-            <Link href={projectDetails?.webSiteUrl} target='_blank' rel='noreferrer' className='flexCenter gap-2 tex-sm font-medium text-primary-purple'>
+            <Link href={projectDetails?.liveSiteUrl} target='_blank' rel='noreferrer' className='flexCenter gap-2 tex-sm font-medium text-primary-purple'>
               🚀 <span className='underline'>Live Site</span> 
             </Link>
           </div>
