@@ -11,8 +11,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@types/jsonwebtoken": "^9.0.2",
+    "@types/react": "18.2.47",
     "@types/node": "20.10.6",
-    "@types/react": "18.2.20",
     "@types/react-dom": "18.2.18",
     "autoprefixer": "10.4.15",
     "cloudinary": "^1.40.0",
