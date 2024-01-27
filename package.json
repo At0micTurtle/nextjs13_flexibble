@@ -12,7 +12,7 @@
     "@headlessui/react": "^1.7.17",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "20.5.1",
-    "@types/react": "18.2.20",
+    "@types/react": "18.2.47",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
     "cloudinary": "^1.40.0",
