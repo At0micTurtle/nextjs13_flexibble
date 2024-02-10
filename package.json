@@ -15,7 +15,7 @@
     "@types/node": "20.11.5",
     "@types/react-dom": "18.2.18",
     "cloudinary": "^1.41.2",
-    "autoprefixer": "10.4.16",
+    "autoprefixer": "10.4.17",
     "graphql-request": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
     "next": "13.5.6",
